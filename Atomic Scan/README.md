@@ -31,3 +31,14 @@ For the solution We introduce you to :
 
        python3   atomic.py   <domain name>    <flags>
 
+flags Details:
+Usage details: <example.com> flag1  flag2   ......... 
+              
+Flags:  
+--whois     Perform basic WHOIS search
+--dnsenum   for DNS Enumeration
+--crtenum   for Subdomain Enumeration Using CRT.SH API
+--alienenum for Subdomain Enumeration Using OTX API
+--portscan  for Scanning Ports
+--V         for Banner Grabbing
+--W         for Wapplayzer search using Wappalyzer API
