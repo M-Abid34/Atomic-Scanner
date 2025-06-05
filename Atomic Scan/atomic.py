@@ -196,7 +196,17 @@ def report(result):
 def main():
     print_banner()
     if len(sys.argv) <2:
-        print(f"Usage details: <example.com> flag")
+        print(f"""Usage details: <example.com> flag1  flag2   ......... 
+              
+Flags:  
+--whois     Perform basic WHOIS search
+--dnsenum   for DNS Enumeration
+--crtenum   for Subdomain Enumeration Using CRT.SH API
+--alienenum for Subdomain Enumeration Using OTX API
+--portscan  for Scanning Ports
+--V         for Banner Grabbing
+--W         for Wapplayzer search using Wappalyzer API
+""")
         sys.exit(1)
     
     domain = sys.argv[1]
