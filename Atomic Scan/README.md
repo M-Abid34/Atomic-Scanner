@@ -27,7 +27,11 @@ For the solution We introduce you to :
 
     wget https://codeload.github.com/M-Abid34/Atomic-Scanner/zip/refs/heads/main
     git clone https://github.com/M-Abid34/Atomic-Scanner.git
-        
+    
+  Dependencis:
+    
+    pip install python-Wappalyzer
+  
   Usage details:
 
        python3   atomic.py   <domain name>    <flags>
