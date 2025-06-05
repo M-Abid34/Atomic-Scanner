@@ -25,8 +25,9 @@ For the solution We introduce you to :
                                                                                                                
   To Download it you can use:
 
-       wget https://codeload.github.com/M-Abid34/Atomic-Scanner/zip/refs/heads/main
-        git clone https://github.com/M-Abid34/Atomic-Scanner.git
+    wget https://codeload.github.com/M-Abid34/Atomic-Scanner/zip/refs/heads/main
+    git clone https://github.com/M-Abid34/Atomic-Scanner.git
+        
   Usage details:
 
        python3   atomic.py   <domain name>    <flags>
