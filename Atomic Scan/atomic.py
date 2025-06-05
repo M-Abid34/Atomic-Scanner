@@ -16,6 +16,14 @@ def print_banner():
     ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚═╝ ╚═════╝      ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝
 
                                ⚡ Fast • Modular • Recon Toolkit ⚡
+    Which can perfome:
+    => WHOIS LOOKUP
+    => DNS ENUMERATION
+    => SUBDOMAIN ENUMERATION USING CRT.SH and OTX
+    => SIMPLE PORT SCANNING
+    => BANNER GRABBING
+    => WAPPALYZER LOOKUP
+    
     """
     print(banner)
 
