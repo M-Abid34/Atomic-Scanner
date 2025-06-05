@@ -25,7 +25,7 @@ For the solution We introduce you to :
                                                                                                                
   To Download it you can use:
 
-       wget https://github.com/M-Abid34/Python
+       wget https://github.com/M-Abid34/Python/tree/c4053a5431b257e161705f001d4df74a32c477ff/Atomic%20Scan
 
   Usage details:
 
