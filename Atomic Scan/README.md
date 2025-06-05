@@ -25,7 +25,7 @@ For the solution We introduce you to :
                                                                                                                
   To Download it you can use:
 
-       wget https://github.com/M-Abid34/Python.git
+       wget https://github.com/M-Abid34/Python
 
   Usage details:
 
