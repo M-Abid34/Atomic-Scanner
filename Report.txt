@@ -1,0 +1,185 @@
+[2025-06-05 16:07:57] WHOIS LookUP FOR wpbeginner.com
+[2025-06-05 16:08:01] {
+  "domain_name": "WPBEGINNER.COM",
+  "registrar": "GoDaddy.com, LLC",
+  "registrar_url": [
+    "http://www.godaddy.com",
+    "https://www.godaddy.com"
+  ],
+  "reseller": null,
+  "whois_server": "whois.godaddy.com",
+  "referral_url": null,
+  "updated_date": [
+    "2023-07-25 16:05:02",
+    "2022-10-16 10:23:28"
+  ],
+  "creation_date": [
+    "2009-04-24 01:50:18",
+    "2009-04-23 20:50:18"
+  ],
+  "expiration_date": [
+    "2028-04-24 01:50:18",
+    "2028-04-23 20:50:18"
+  ],
+  "name_servers": [
+    "ALI.NS.CLOUDFLARE.COM",
+    "HUGH.NS.CLOUDFLARE.COM"
+  ],
+  "status": [
+    "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+    "clientRenewProhibited https://icann.org/epp#clientRenewProhibited",
+    "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+    "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited"
+  ],
+  "emails": "abuse@godaddy.com",
+  "dnssec": "unsigned",
+  "name": "Registration Private",
+  "org": "Domains By Proxy, LLC",
+  "address": [
+    "DomainsByProxy.com",
+    "100 S. Mill Ave, Suite 1600"
+  ],
+  "city": "Tempe",
+  "state": "Arizona",
+  "registrant_postal_code": "85281",
+  "country": "US"
+}
+[2025-06-05 16:11:07] INFO: WHOIS LookUP FOR wpbeginner.com
+[2025-06-05 16:11:12] INFO: {
+  "domain_name": "WPBEGINNER.COM",
+  "registrar": "GoDaddy.com, LLC",
+  "registrar_url": [
+    "http://www.godaddy.com",
+    "https://www.godaddy.com"
+  ],
+  "reseller": null,
+  "whois_server": "whois.godaddy.com",
+  "referral_url": null,
+  "updated_date": [
+    "2023-07-25 16:05:02",
+    "2022-10-16 10:23:28"
+  ],
+  "creation_date": [
+    "2009-04-24 01:50:18",
+    "2009-04-23 20:50:18"
+  ],
+  "expiration_date": [
+    "2028-04-24 01:50:18",
+    "2028-04-23 20:50:18"
+  ],
+  "name_servers": [
+    "ALI.NS.CLOUDFLARE.COM",
+    "HUGH.NS.CLOUDFLARE.COM"
+  ],
+  "status": [
+    "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+    "clientRenewProhibited https://icann.org/epp#clientRenewProhibited",
+    "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+    "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited"
+  ],
+  "emails": "abuse@godaddy.com",
+  "dnssec": "unsigned",
+  "name": "Registration Private",
+  "org": "Domains By Proxy, LLC",
+  "address": [
+    "DomainsByProxy.com",
+    "100 S. Mill Ave, Suite 1600"
+  ],
+  "city": "Tempe",
+  "state": "Arizona",
+  "registrant_postal_code": "85281",
+  "country": "US"
+}
+[2025-06-05 16:12:04] INFO: Starting WHOIS............
+[2025-06-05 16:12:04] INFO: WHOIS LookUP FOR wpbeginner.com
+[2025-06-05 16:12:07] INFO: {
+  "domain_name": "WPBEGINNER.COM",
+  "registrar": "GoDaddy.com, LLC",
+  "registrar_url": [
+    "http://www.godaddy.com",
+    "https://www.godaddy.com"
+  ],
+  "reseller": null,
+  "whois_server": "whois.godaddy.com",
+  "referral_url": null,
+  "updated_date": [
+    "2023-07-25 16:05:02",
+    "2022-10-16 10:23:28"
+  ],
+  "creation_date": [
+    "2009-04-24 01:50:18",
+    "2009-04-23 20:50:18"
+  ],
+  "expiration_date": [
+    "2028-04-24 01:50:18",
+    "2028-04-23 20:50:18"
+  ],
+  "name_servers": [
+    "ALI.NS.CLOUDFLARE.COM",
+    "HUGH.NS.CLOUDFLARE.COM"
+  ],
+  "status": [
+    "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+    "clientRenewProhibited https://icann.org/epp#clientRenewProhibited",
+    "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+    "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited"
+  ],
+  "emails": "abuse@godaddy.com",
+  "dnssec": "unsigned",
+  "name": "Registration Private",
+  "org": "Domains By Proxy, LLC",
+  "address": [
+    "DomainsByProxy.com",
+    "100 S. Mill Ave, Suite 1600"
+  ],
+  "city": "Tempe",
+  "state": "Arizona",
+  "registrant_postal_code": "85281",
+  "country": "US"
+}
+[2025-06-05 16:12:07] INFO: {
+  "domain_name": "WPBEGINNER.COM",
+  "registrar": "GoDaddy.com, LLC",
+  "registrar_url": [
+    "http://www.godaddy.com",
+    "https://www.godaddy.com"
+  ],
+  "reseller": null,
+  "whois_server": "whois.godaddy.com",
+  "referral_url": null,
+  "updated_date": [
+    "2023-07-25 16:05:02",
+    "2022-10-16 10:23:28"
+  ],
+  "creation_date": [
+    "2009-04-24 01:50:18",
+    "2009-04-23 20:50:18"
+  ],
+  "expiration_date": [
+    "2028-04-24 01:50:18",
+    "2028-04-23 20:50:18"
+  ],
+  "name_servers": [
+    "ALI.NS.CLOUDFLARE.COM",
+    "HUGH.NS.CLOUDFLARE.COM"
+  ],
+  "status": [
+    "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited",
+    "clientRenewProhibited https://icann.org/epp#clientRenewProhibited",
+    "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+    "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited"
+  ],
+  "emails": "abuse@godaddy.com",
+  "dnssec": "unsigned",
+  "name": "Registration Private",
+  "org": "Domains By Proxy, LLC",
+  "address": [
+    "DomainsByProxy.com",
+    "100 S. Mill Ave, Suite 1600"
+  ],
+  "city": "Tempe",
+  "state": "Arizona",
+  "registrant_postal_code": "85281",
+  "country": "US"
+}
+[2025-06-05 16:12:07] INFO: Completed.
