@@ -25,9 +25,29 @@ For the solution We introduce you to :
                                                                                                                
   To Download it you can use:
 
-       wget https://github.com/M-Abid34/Python.git
-
+    wget https://codeload.github.com/M-Abid34/Atomic-Scanner/zip/refs/heads/main
+    git clone https://github.com/M-Abid34/Atomic-Scanner.git
+    
+  Dependencis:
+    
+    pip install python-Wappalyzer
+  
   Usage details:
 
        python3   atomic.py   <domain name>    <flags>
 
+flags Details:
+
+      Usage details: <example.com> flag1  flag2   ......... 
+
+      Flags:  
+      --whois     Perform basic WHOIS search
+      --dnsenum   for DNS Enumeration
+      --crtenum   for Subdomain Enumeration Using CRT.SH API
+      --alienenum for Subdomain Enumeration Using OTX API
+      --portscan  for Scanning Ports
+      --V         for Banner Grabbing
+      --W         for Wapplayzer search using Wappalyzer API
+Example Usage:
+
+      python3 example.com   --whois --dnsenum --V
