@@ -85,23 +85,6 @@ def funccrtenum(domain):
     except Exception as e:
         print("Error")
 
-def funcalienvaulttenum(domain):
-    url = f"https://otx.alienvault.com/api/v1/indicators/domain/{domain}/passive_dns"
-    try:
-        report(f"OTX ENUMERATION FOR {domain}")
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        subdomains = set()
-        for sub in data.get('passive_dns', []):
-            Subdomains = sub.get('hostname','').split('\n')
-            for name in Subdomains:
-                if name.endswith(domain):
-                    subdomains.add(name.strip())
-        report(sorted(subdomains))
-        return sorted(subdomains)
-    except Exception as e:
-        print("Error")
 
 
 def check_port_status(ip,port:int) -> bool:
@@ -192,6 +175,26 @@ def report(result):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f"[{timestamp}] {result}", file=f)
 
+def directoryenumeration(domain,wordlist):
+    report(f"Directory Enumeration for {domain}")
+    url = f"http://{domain}/"
+    with open(wordlist, 'r') as file:
+        for line in file:
+            directory = line.strip()
+            full_url = url + directory
+            try:
+                response = requests.get(full_url, timeout=5)
+                if response.status_code == 200:
+                    print(f"Found: {full_url}")
+                    report(f"Found: {full_url}")
+                elif response.status_code == 403:
+                    print(f"[-] Forbidden: {full_url} (Status: 403)")
+                elif response.status_code == 404:
+                    print(f"[-] Not Found: {full_url} (Status: 404)")
+                elif response.status_code == 500:
+                    print(f"[-] Internal Server Error: {full_url} (Status: 500)")
+            except requests.RequestException:
+                continue
 
 def main():
     print_banner()
@@ -202,10 +205,11 @@ Flags:
 --whois     Perform basic WHOIS search
 --dnsenum   for DNS Enumeration
 --crtenum   for Subdomain Enumeration Using CRT.SH API
---alienenum for Subdomain Enumeration Using OTX API
+--direnum   for Directory Enumeration 
 --portscan  for Scanning Ports
 --V         for Banner Grabbing
 --W         for Wapplayzer search using Wappalyzer API
+--all       for All the above operations
 """)
         sys.exit(1)
     
@@ -228,10 +232,6 @@ Flags:
         print("Starting  CRT SUBDOMAIN ENUMERATION............")
         print(funccrtenum(domain))
         print("Completed.")
-    if "--alienenum" in flag:
-        print("Starting  ALIEN SUBDOMAIN ENUMERATION............")
-        print(funcalienvaulttenum(domain))
-        print("Completed.")
     if "--portscan" in flag:
         print("Starting  Port Scanning ............")
         ip = socket.gethostbyname(domain)
@@ -246,7 +246,38 @@ Flags:
         print("Starting  Wapplyzer API Lookup ............")
         print(wappalyzer(domain))
         print("Completed.")
-
+    if "--direnum" in flag:
+        print("Starting Directory Enumeration ............")
+        wordlist = input("Enter the path to the wordlist file: ")
+        directoryenumeration(domain, wordlist)
+        print("Completed.")
+    if "--all" in flag:
+        print("Starting WHOIS............")
+        print(funcwhois(domain))
+        print("Completed.\n")
+        print("Starting DNS ENUMERATION............")
+        print(funcdnsenum(domain))
+        print("Completed.\n")
+        print("Starting  CRT SUBDOMAIN ENUMERATION............")
+        print(funccrtenum(domain))
+        print("Completed.\n")
+        print("Starting  Port Scanning ............")
+        ip = socket.gethostbyname(domain)
+        print(nmap(ip))
+        print("Completed.\n")
+        print("Starting  Banner Grabbing ............")
+        ip = socket.gethostbyname(domain)
+        print(bannergrabber(ip))
+        print("Completed.\n")
+        print("Starting  Wapplyzer API Lookup ............")
+        print(wappalyzer(domain))
+        print("Completed.\n")
+        print("Starting Directory Enumeration ............")
+        wordlist = input("Enter the path to the wordlist file: ")
+        directoryenumeration(domain, wordlist)
+        print("Completed.\n")
+    print("All operations completed successfully.")
+    print("Report saved to Report.txt")
 
 
 
