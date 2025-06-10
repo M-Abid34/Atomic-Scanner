@@ -19,10 +19,11 @@ def print_banner():
     Which can perfome:
     => WHOIS LOOKUP
     => DNS ENUMERATION
-    => SUBDOMAIN ENUMERATION USING CRT.SH and OTX
+    => SUBDOMAIN ENUMERATION USING CRT.SH 
     => SIMPLE PORT SCANNING
     => BANNER GRABBING
     => WAPPALYZER LOOKUP
+    => Sub Direcotry Enumeration
     
     """
     print(banner)
@@ -34,7 +35,7 @@ def funcwhois(domain):
         report(info)
         return info
     except:
-        print(f"Erro Performing Whois!.")
+        print(f"Error Performing Whois!.")
 
 
 def funcdnsenum(domain):
@@ -137,7 +138,7 @@ def bannergrabber(ip):
                 s.sendall(b"SYST\r\n")
             elif port == 25:
                 s.sendall(b"EHLO example.com\r\n")
-
+            # can be customized further as per requirements
             banner = s.recv(1024)
             try:
                 service = socket.getservbyport(port)
@@ -196,21 +197,21 @@ def directoryenumeration(domain,wordlist):
             except requests.RequestException:
                 continue
 
-def main():
+if __name__ == "__main__":
     print_banner()
     if len(sys.argv) <2:
         print(f"""Usage details: <example.com> flag1  flag2   ......... 
               
-Flags:  
---whois     Perform basic WHOIS search
---dnsenum   for DNS Enumeration
---crtenum   for Subdomain Enumeration Using CRT.SH API
---direnum   for Directory Enumeration 
---portscan  for Scanning Ports
---V         for Banner Grabbing
---W         for Wapplayzer search using Wappalyzer API
---all       for All the above operations
-""")
+    Flags:  
+        --whois     Perform basic WHOIS search
+        --dnsenum   for DNS Enumeration
+        --crtenum   for Subdomain Enumeration Using CRT.SH API
+        --direnum   for Directory Enumeration 
+        --portscan  for Scanning Ports
+        --V         for Banner Grabbing
+        --W         for Wapplayzer search using Wappalyzer API
+        --all       for All the above operations
+        """)
         sys.exit(1)
     
     domain = sys.argv[1]
@@ -276,11 +277,12 @@ Flags:
         wordlist = input("Enter the path to the wordlist file: ")
         directoryenumeration(domain, wordlist)
         print("Completed.\n")
-    print("All operations completed successfully.")
-    print("Report saved to Report.txt")
+        print("All operations completed successfully.")
+        print("Report saved to Report.txt")
 
 
 
 
 
-main()
+# This code is a modular recon toolkit that can perform various reconnaissance tasks such as WHOIS lookup, DNS enumeration, subdomain enumeration using crt.sh, port scanning, banner grabbing, Wappalyzer lookup, and directory enumeration.
+# It provides a command-line interface for users to specify the target domain and the desired operations to perform. The results of each operation are printed to the console and saved to a report file named "Report.txt".

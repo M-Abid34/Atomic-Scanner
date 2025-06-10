@@ -17,10 +17,11 @@ For the solution We introduce you to :
     Which can perfomr:
     => WHOIS LOOKUP
     => DNS ENUMERATION
-    => SUBDOMAIN ENUMERATION USING CRT.SH and OTX
+    => SUBDOMAIN ENUMERATION USING CRT.SH 
     => SIMPLE PORT SCANNING
     => BANNER GRABBING
     => WAPPALYZER LOOKUP
+    => Sub Directory Enumeration
                                                                                                                    
                                                                                                                
   To Download it you can use:
@@ -44,10 +45,11 @@ flags Details:
       --whois     Perform basic WHOIS search
       --dnsenum   for DNS Enumeration
       --crtenum   for Subdomain Enumeration Using CRT.SH API
-      --alienenum for Subdomain Enumeration Using OTX API
+      --direnum   for Subdirectories Enumeration 
       --portscan  for Scanning Ports
       --V         for Banner Grabbing
       --W         for Wapplayzer search using Wappalyzer API
+      --all       for all of the above
 Example Usage:
 
       python3 example.com   --whois --dnsenum --V
