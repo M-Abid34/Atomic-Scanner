@@ -8,6 +8,7 @@ import socket
 from concurrent.futures import ThreadPoolExecutor
 import time
 import subprocess
+import re
 open_ports = []    
 banners = {}
 def print_banner():
@@ -135,12 +136,16 @@ def banner_grab(port):
         if result == 0:
             try:
                 time.sleep(0.5)
-                banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
-                if not banner:
-                    s.sendall(b'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n')
+                if port == 80:
+                    http_req = f"HEAD / HTTP/1.1\r\nHost: {target_ip}\r\nConnection: close\r\n\r\n"
+                    s.sendall(http_req.encode())
+                    banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
+                elif port == 22 or port == 21 or port == 25:
                     time.sleep(0.5)
                     banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
-                    report(f"Banner Grabbing on {domain} \n [+] Port {port} is open | Banner: {banner if banner else 'No banner received'}")
+                else:
+                    time.sleep(0.5)
+                    banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
             except Exception:
                 banner = ''
             print(f"[+] Port {port} is open | Banner: {banner if banner else 'No banner received'}")
@@ -191,9 +196,11 @@ def run_tech_detect(domain):
     except Exception as e:
         report(f"[!] Tech detection failed: {str(e)}")
         return f"[!] Tech detection failed: {str(e)}"
+def clean_banner(text):
+    return re.sub(r'[^\x20-\x7E]', '.', text)  
 
 def report(result):
-    with open("Report.txt", "a") as f:
+    with open("Report.txt", "a", encoding="utf-8") as f:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f"[{timestamp}] {result}", file=f)
 
@@ -327,9 +334,9 @@ if __name__ == "__main__":
         print('Starting banner grabbing on host:', target_ip)
         run_scanner_banner(ports)
         end = time.time()
-        report(f"Banner Grabbing for {domain} completed in {end - start:.2f} seconds. Open ports with banners: {banners}")
         print(f'Time taken: {end - start:.2f} seconds')
         print(f"Open ports with banners:")
+        report(f"Banner Grabbing for {domain} completed in {end - start:.2f} seconds. Open ports with banners: {banners}")
         print("Completed.\n")
         print("Starting  Wapplyzer API Lookup ............")
         print(wappalyzer(domain))
