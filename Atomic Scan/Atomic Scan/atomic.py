@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 import subprocess
 open_ports = []    
+banners = {}
 def print_banner():
     banner = r"""
      █████╗ ████████╗ ██████╗ ███╗   ███╗██╗ ██████╗     ███████╗  ██████╗  █████╗ ███╗   ██╗
@@ -121,44 +122,36 @@ def run_scanner(ports, thread_count = 100):
     with ThreadPoolExecutor(max_workers=thread_count) as executor:
         for port in ports:
             executor.submit(port_scan, port)
-
+def run_scanner_banner(ports, thread_count = 100):
+    with ThreadPoolExecutor(max_workers=thread_count) as executor:
+        for port in ports:
+            executor.submit(banner_grab, port)
     
-def bannergrabber(ip):
-    report(f" BANNER GRABBING FOR {ip}")
-    start = int(input("Enter the starting port: "))
-    end = int(input("Enter the ending port: "))
-    if start < 1:
-        start = 1
-    if end < 1 or end > 65535:
-        end = 65535
-
-    for port in range(start, end + 1):
-        try:
-            s = socket.socket()
-            s.settimeout(1)
-            s.connect((ip, port))
-
-            if port == 80:
-                s.sendall(b"HEAD / HTTP/1.1\r\nHost: %s\r\n\r\n" % ip.encode())
-            elif port == 21:
-                s.sendall(b"SYST\r\n")
-            elif port == 25:
-                s.sendall(b"EHLO example.com\r\n")
-            # can be customized further as per requirements
-            banner = s.recv(1024)
+def banner_grab(port):
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1)
+        result = s.connect_ex((target_ip, port))
+        if result == 0:
             try:
-                service = socket.getservbyport(port)
-            except:
-                service = "unknown"
-
-            print(f"[+] Port {port} ({service}): {banner.decode(errors='ignore').strip()}")
-            report(f"[+] Port {port} ({service}): {banner.decode(errors='ignore').strip()}")
-            s.close()
-
-        except Exception as e:
-            # print(f"[-] Port {port} closed or no banner. ({str(e)})")  Uncomment only For debugging 
-            pass
-
+                time.sleep(0.5)
+                banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
+                if not banner:
+                    s.sendall(b'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n')
+                    time.sleep(0.5)
+                    banner = s.recv(1024).decode('utf-8', errors='ignore').strip()
+                    report(f"Banner Grabbing on {domain} \n [+] Port {port} is open | Banner: {banner if banner else 'No banner received'}")
+            except Exception:
+                banner = ''
+            print(f"[+] Port {port} is open | Banner: {banner if banner else 'No banner received'}")
+            open_ports.append(port)
+            banners[port] = banner if banner else 'No banner received'
+        s.close()
+    except KeyboardInterrupt:
+        print("\n Exiting Program !!!!")
+        sys.exit()
+    except Exception as e:
+        return False
 
 def wappalyzer(domain):
     report(f"WAPPALYZER FOR {domain}")
@@ -278,8 +271,18 @@ if __name__ == "__main__":
         print("Completed.")
     if "--V" in flag:
         print("Starting  Banner Grabbing ............")
-        ip = socket.gethostbyname(domain)
-        print(bannergrabber(ip))
+        start = time.time()
+        target_ip = socket.gethostbyname(domain)
+        ports = []
+        load_ports(ports)
+        print('Starting banner grabbing on host:', target_ip)
+        run_scanner_banner(ports)
+        end = time.time()
+        print(f'Time taken: {end - start:.2f} seconds')
+        print(f"Open ports with banners:")
+        for port in sorted(open_ports):
+            print(f"  {port}: {banners[port] if banners[port] else 'No banner received'}")
+        report(f"Banner Grabbing for {domain} completed in {end - start:.2f} seconds. Open ports with banners: {banners}")
         print("Completed.")
     if "--W" in flag:
         print("Starting  Wapplyzer API Lookup ............")
@@ -317,8 +320,16 @@ if __name__ == "__main__":
         report(f"Port Scanning for {domain} completed in {end - start:.2f} seconds. Open ports: {sorted(open_ports)}")
         print("Completed.\n")
         print("Starting  Banner Grabbing ............")
-        ip = socket.gethostbyname(domain)
-        print(bannergrabber(ip))
+        start = time.time()
+        target_ip = socket.gethostbyname(domain)
+        ports = []
+        load_ports(ports)
+        print('Starting banner grabbing on host:', target_ip)
+        run_scanner_banner(ports)
+        end = time.time()
+        report(f"Banner Grabbing for {domain} completed in {end - start:.2f} seconds. Open ports with banners: {banners}")
+        print(f'Time taken: {end - start:.2f} seconds')
+        print(f"Open ports with banners:")
         print("Completed.\n")
         print("Starting  Wapplyzer API Lookup ............")
         print(wappalyzer(domain))
