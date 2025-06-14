@@ -31,7 +31,19 @@ For the solution We introduce you to :
     
   Dependencis:
     
+  incase if kali is not installing packages directly use virtual environment
+    
+    python3 -m venv myenv 
+    source myenv/bin/activate
+
+Then install the dependencies:
+
     pip install python-Wappalyzer
+    pip install dnspython
+    pip install whois
+    pip install setuptools
+    pip install requests
+
   
   Usage details:
 
