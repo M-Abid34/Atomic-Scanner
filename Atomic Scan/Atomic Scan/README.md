@@ -40,9 +40,13 @@ Then install the dependencies:
 
     pip install python-Wappalyzer
     pip install dnspython
-    pip install whois
+    pip install python-whois
     pip install setuptools
     pip install requests
+    pip install pyppeteer
+
+nmap-top-ports.txt is a must file in the same folder as program for operation and also the directory.txt.
+if you want to put your own directory name file just copy the names in the file or paste the file in the same folder as programe and change the file name in the code
 
   
   Usage details:

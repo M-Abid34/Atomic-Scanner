@@ -39,10 +39,10 @@ def funcwhois(domain):
         info = whois.whois(domain)
         report(info)
         return info
-    except:
-        report(f"Error Performing Whois LookUP for {domain}")
-        print(f"Error Performing Whois!.")
-
+    except Exception as e:
+        report(f"Error Performing Whois LookUP for {domain}: {e}")
+        print(f"Error Performing Whois!: {e}")
+        return None
 
 def funcdnsenum(domain):
     try:
@@ -80,19 +80,24 @@ def funccrtenum(domain):
     try:
         report(f"CRT.SH ENUMERATION FOR {domain}")
         response = requests.get(url, timeout=10)
-        response.raise_for_status()
+        response.raise_for_status()  
         data = response.json()
+        
         subdomains = set()
         for sub in data:
-            Subdomains = sub.get('name_value','').split('\n')
-            for name in Subdomains:
+            entries = sub.get('name_value', '').split('\n')
+            for name in entries:
                 if name.endswith(domain):
                     subdomains.add(name.strip())
-        report(sorted(subdomains))
-        return sorted(subdomains)
+
+        sorted_subs = sorted(subdomains)
+        report(sorted_subs)
+        return sorted_subs
+
     except Exception as e:
         report(f"Error Performing CRT.SH ENUMERATION for {domain}: {str(e)}")
-        print("Error")
+        print(f"Error: {str(e)}")
+        return []
 
 
 def load_ports(ports):
@@ -204,9 +209,21 @@ def report(result):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         print(f"[{timestamp}] {result}", file=f)
 
-def directoryenumeration(domain,wordlist):
+def directoryenumeration(domain, wordlist):
     report(f"Directory Enumeration for {domain}")
-    url = f"http://{domain}/"
+
+    protocols = ['https://', 'http://']
+    for proto in protocols:
+        url = proto + domain + '/'
+        try:
+            requests.get(url, timeout=5)
+            break  # If this works, use it
+        except requests.RequestException:
+            continue
+    else:
+        print(f"[!] Could not connect to {domain} using HTTP or HTTPS.")
+        return
+
     with open(wordlist, 'r') as file:
         for line in file:
             directory = line.strip()
@@ -214,14 +231,14 @@ def directoryenumeration(domain,wordlist):
             try:
                 response = requests.get(full_url, timeout=5)
                 if response.status_code == 200:
-                    print(f"Found: {full_url}")
-                    report(f"Found: {full_url}")
+                    print(f"[+] Found: {full_url}")
+                    report(f"[+] Found: {full_url}")
                 elif response.status_code == 403:
-                    print(f"[-] Forbidden: {full_url} (Status: 403)")
+                    print(f"[-] Forbidden: {full_url} (403)")
                 elif response.status_code == 404:
-                    print(f"[-] Not Found: {full_url} (Status: 404)")
+                    pass  # Silent skip or log
                 elif response.status_code == 500:
-                    print(f"[-] Internal Server Error: {full_url} (Status: 500)")
+                    print(f"[!] Server Error: {full_url} (500)")
             except requests.RequestException:
                 continue
 
@@ -297,7 +314,7 @@ if __name__ == "__main__":
         print("Completed.")
     if "--direnum" in flag:
         print("Starting Directory Enumeration ............")
-        wordlist = input("Enter the path to the wordlist file: ")
+        wordlist = 'directory.txt'
         directoryenumeration(domain, wordlist)
         print("Completed.")
     if "--what" in flag:
@@ -345,7 +362,7 @@ if __name__ == "__main__":
         run_tech_detect(domain)
         print("Completed.\n")
         print("Starting Directory Enumeration ............")
-        wordlist = input("Enter the path to the wordlist file: ")
+        wordlist = 'directory.txt'
         directoryenumeration(domain, wordlist)
         print("Completed.\n")
         print("All operations completed successfully.")
