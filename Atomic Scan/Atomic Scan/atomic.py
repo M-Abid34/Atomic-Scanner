@@ -314,7 +314,8 @@ if __name__ == "__main__":
         print("Completed.")
     if "--direnum" in flag:
         print("Starting Directory Enumeration ............")
-        wordlist = 'directory.txt'
+        wordlist = 'directory.txt'  # Change this to your wordlist file
+        print(f"Using wordlist: {wordlist}")
         directoryenumeration(domain, wordlist)
         print("Completed.")
     if "--what" in flag:
@@ -362,7 +363,8 @@ if __name__ == "__main__":
         run_tech_detect(domain)
         print("Completed.\n")
         print("Starting Directory Enumeration ............")
-        wordlist = 'directory.txt'
+        wordlist = 'directory.txt'   #Change this to your wordlist file
+        print(f"Using wordlist: {wordlist}")
         directoryenumeration(domain, wordlist)
         print("Completed.\n")
         print("All operations completed successfully.")
